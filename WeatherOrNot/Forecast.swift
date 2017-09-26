@@ -38,6 +38,15 @@ class Forecast {
         return _weatherType
     }
     
+//init forecast data functon
+    
+    init(weatherDict: Dictionary<String, AnyObject>) {
+        
+        
+        
+        
+        
+    }//end init
     
     
     

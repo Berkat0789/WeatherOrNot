@@ -176,6 +176,7 @@
                     <connections>
                         <outlet property="cityName" destination="YsL-l8-4Fr" id="xdg-8w-ebk"/>
                         <outlet property="currentTemp" destination="Wmb-zg-R4j" id="TJR-KK-ry7"/>
+                        <outlet property="tableView" destination="kYm-jB-xVT" id="D8z-gG-Yqk"/>
                         <outlet property="todaysDate" destination="J2I-WV-wMb" id="axQ-La-RYi"/>
                         <outlet property="weatherImg" destination="fOT-0s-0mE" id="Fjh-qC-9HR"/>
                         <outlet property="weatherType" destination="Sxn-3L-9FH" id="i6p-nt-gAC"/>
