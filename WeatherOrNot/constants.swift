@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+
+
+let base_URL = "http://api.openweathermap.org/data/2.5/weather?"
+let lattitude = "lat="
+let longitude = "&lon="
+let appID = "&appid="
+let apiKEy = "a284c3b23d069ce67d9091b806b4e217"
+
+let weatherURL = "\(base_URL)\(lattitude)\(longitude)\(appID)\(apiKEy)"
