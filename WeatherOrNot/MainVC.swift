@@ -35,7 +35,29 @@ class MainVC: UIViewController {
             //
         }
 
+    }//end view did load
+    
+    
+    
+    
+    
+    func UpdateUI() {
+        weatherImg.image = UIImage(named: currentweather.weatherType)
+        currentTemp.text = "\(currentweather.CurrentTemp)"
+        todaysDate.text = currentweather.todaysDate
+        cityName.text = currentweather.cityName
+        weatherType.text = currentweather.weatherType
+        
+        
     }
+    
+    
+    
+    
+ //function to update ui
+    
+    
+    
 
 
-}
+}// end controller
