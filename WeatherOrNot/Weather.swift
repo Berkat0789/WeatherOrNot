@@ -59,7 +59,7 @@ class Weather {
 
 //function to call weather Data from Api
     
-    func downloadWeatherData(complete: downloadComplete) {
+    func downloadWeatherData(complete: @escaping downloadComplete) {
         Alamofire.request(weatherURL).responseJSON {responce in
             let result = responce.result
 
@@ -77,7 +77,8 @@ class Weather {
                 
                 if let temperature = Dict["main"] as? Dictionary<String, AnyObject> {
                     if let currenttemp = temperature["temp"] as? Double {
-                        self._CurrentTemp = currenttemp
+                        let KeltoFar = Double(round(9/5) * (currenttemp - 273) + 32)
+                        self._CurrentTemp = KeltoFar
                         print(self._CurrentTemp)
                     }
                 }
@@ -95,7 +96,7 @@ class Weather {
                 
             }//end if let Dict
             
-            
+            complete()
             
         }//end Alamo Request 
         

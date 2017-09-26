@@ -32,7 +32,7 @@ class MainVC: UIViewController {
         print(weatherURL)
         
         currentweather.downloadWeatherData {
-            //
+              self.UpdateUI()
         }
 
     }//end view did load
