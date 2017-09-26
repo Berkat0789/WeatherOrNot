@@ -166,6 +166,13 @@
                             <constraint firstAttribute="trailing" secondItem="1cF-1z-sgH" secondAttribute="trailing" id="xMQ-yn-NTf"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cityName" destination="YsL-l8-4Fr" id="xdg-8w-ebk"/>
+                        <outlet property="currentTemp" destination="Wmb-zg-R4j" id="TJR-KK-ry7"/>
+                        <outlet property="todaysDate" destination="J2I-WV-wMb" id="axQ-La-RYi"/>
+                        <outlet property="weatherImg" destination="fOT-0s-0mE" id="Fjh-qC-9HR"/>
+                        <outlet property="weatherType" destination="Sxn-3L-9FH" id="i6p-nt-gAC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

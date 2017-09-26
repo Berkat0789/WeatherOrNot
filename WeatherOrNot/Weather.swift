@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class Weather {
     
@@ -55,6 +56,18 @@ class Weather {
         return _CurrentTemp
     }
     
+
+//function to call weather Data from Api
+    
+    func downloadWeatherData(complete: downloadComplete) {
+        Alamofire.request(weatherURL).responseJSON {responce in
+            let result = responce.result
+            print(responce)
+            
+        }//end Alamo Request 
+        
+        
+    }//end downoad weather func
     
     
     
