@@ -84,7 +84,7 @@
                                 <rect key="frame" x="0.0" y="230" width="375" height="437"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="ROo-nm-8Jn">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="150" id="ROo-nm-8Jn" customClass="weatherCell" customModule="WeatherOrNot" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ROo-nm-8Jn" id="oRg-Jw-t6y">
@@ -151,6 +151,13 @@
                                                 <constraint firstItem="EQG-cN-0zv" firstAttribute="leading" secondItem="5DJ-eO-WkM" secondAttribute="trailing" constant="8" id="i8j-Lc-K9h"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dayofweek" destination="SGU-D3-C6X" id="9AY-KL-Jos"/>
+                                            <outlet property="highTemp" destination="9LR-wZ-ed9" id="Naf-tD-EnN"/>
+                                            <outlet property="lowtemp" destination="9oG-Qq-rQj" id="1MP-x2-xKS"/>
+                                            <outlet property="weathericon" destination="5DJ-eO-WkM" id="5n8-N2-MuQ"/>
+                                            <outlet property="weathertype" destination="cmP-er-Ud4" id="LpD-zw-hSy"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
