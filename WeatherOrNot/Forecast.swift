@@ -52,13 +52,15 @@ class Forecast {
         if let main = weatherDict["main"] as? Dictionary<String, AnyObject>{
             if let lowtemp = main["temp_min"] as? Double {
                 let KeltoFar = lowtemp * (9/5) - 459.67
-                self._lowTemp = KeltoFar
+                let finalonvert = Double(round(10 * KeltoFar / 10))
+                self._lowTemp = finalonvert
                 print(self._lowTemp)
             }//end if let low temp 
             
             if let hightemp = main["temp_max"] as? Double {
                 let KeltoFar = hightemp * (9/5) - 459.67
-                self._highTemp = KeltoFar
+                let finalonvert = Double(round(10 * KeltoFar / 10))
+                self._highTemp = finalonvert
                 print(self._highTemp)
             }
             

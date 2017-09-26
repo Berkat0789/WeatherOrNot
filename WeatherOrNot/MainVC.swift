@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import CoreLocation
 
-class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     //ib outlets for ui view
     @IBOutlet weak var weatherImg: UIImageView!
@@ -23,6 +24,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentweather = Weather()
     var forecast: Forecast!
+    var locationManager = CLLocationManager()
+    var currentLocaiton: CLLocation!
+    
     
     //Arrays
     
@@ -36,20 +40,48 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.delegate = self
         tableView.dataSource = self
+        locationManager.delegate = self
+        locationManager.startMonitoringSignificantLocationChanges()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
         
         print(weatherURL)
         print(forecastURL)
         
         
-        currentweather.downloadWeatherData {
-            self.downloadForecastData {
-                self.UpdateUI()
-
-            }
-        }
+     
 
     }//end view did load
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationAutho()
+    }
+    
+    
+    
+    
+//---Function for getting locaiton--//
+    
+    func locationAutho() {
+        if CLLocationManager.authorizationStatus() ==  .authorizedWhenInUse {
+            currentLocaiton = locationManager.location
+            Location.sharedInstance.Latitude = currentLocaiton.coordinate.latitude
+            Location.sharedInstance.Longitude = currentLocaiton.coordinate.longitude
+            currentweather.downloadWeatherData {
+                self.downloadForecastData {
+                    self.UpdateUI()
+                    
+                }
+            }
+            print(Location.sharedInstance.Latitude, Location.sharedInstance.Longitude)
+            
+        }else{
+            locationManager.requestWhenInUseAuthorization()
+            locationAutho()
+        }
+        
+    }
     
 
     
@@ -89,7 +121,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 ///---function to get forecast data---///
     
     func downloadForecastData(complete: @escaping downloadComplete) {
-        Alamofire.request(forecastURL).responseJSON{ response in
+        Alamofire.request(newforecastURL).responseJSON{ response in
             let result = response.result
             
             
@@ -103,6 +135,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         self.forecastList.append(forecast)
                         print(forca)
                     }
+                    self.forecastList.remove(at: 0)
                     self.tableView.reloadData()
                     
                 }//end if let list
