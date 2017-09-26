@@ -62,7 +62,40 @@ class Weather {
     func downloadWeatherData(complete: downloadComplete) {
         Alamofire.request(weatherURL).responseJSON {responce in
             let result = responce.result
-            print(responce)
+
+            if let Dict = result.value as? Dictionary<String, AnyObject>{
+                
+                if let weather = Dict["weather"] as? [Dictionary<String, AnyObject>] {
+                    if let weathertype = weather[0]["main"] as? String {
+                        self._weathertype = weathertype
+                        print(self._weathertype)
+                    }//end if  let weathertype
+                }// end if let weather
+                
+                
+                
+                
+                if let temperature = Dict["main"] as? Dictionary<String, AnyObject> {
+                    if let currenttemp = temperature["temp"] as? Double {
+                        self._CurrentTemp = currenttemp
+                        print(self._CurrentTemp)
+                    }
+                }
+                
+                
+                if let name = Dict["name"] as? String {
+                    self._cityName = name.capitalized
+                    print(self._cityName)
+                }
+                
+                
+                
+                
+                
+                
+            }//end if let Dict
+            
+            
             
         }//end Alamo Request 
         
