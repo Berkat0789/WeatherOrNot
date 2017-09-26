@@ -37,10 +37,51 @@ class Forecast {
         }
         return _weatherType
     }
+    var DayofWeek: String {
+        if _dayofweek == nil {
+            _dayofweek = ""
+            
+        }
+        return _dayofweek
+    }
     
 //init forecast data functon
     
     init(weatherDict: Dictionary<String, AnyObject>) {
+        
+        if let main = weatherDict["main"] as? Dictionary<String, AnyObject>{
+            if let lowtemp = main["temp_min"] as? Double {
+                let KeltoFar = lowtemp * (9/5) - 459.67
+                self._lowTemp = KeltoFar
+                print(self._lowTemp)
+            }//end if let low temp 
+            
+            if let hightemp = main["temp_max"] as? Double {
+                let KeltoFar = hightemp * (9/5) - 459.67
+                self._highTemp = KeltoFar
+                print(self._highTemp)
+            }
+            
+        }//end  if let main
+        
+        if let weather = weatherDict["weather"] as? [Dictionary<String, AnyObject>] {
+            if let weathertype = weather[0]["main"] as? String {
+                self._weatherType = weathertype
+                print(self._weatherType)
+            }
+        }
+        
+        if let date = weatherDict["dt"] as? Double {
+            let convertedDate = Date(timeIntervalSince1970: date)
+            let dateformatter = DateFormatter()
+            dateformatter.dateStyle = .long
+            dateformatter.timeStyle = .none
+            dateformatter.dateFormat = "EEE"
+            self._dayofweek = convertedDate.TodaysDate()
+            print(self._dayofweek)
+            
+            
+        }
         
         
         
@@ -51,3 +92,16 @@ class Forecast {
     
     
 }
+//set date outside of class 
+
+extension Date{
+    func TodaysDate() -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "EEEE"
+        return dateformatter.string(from: self)
+    }
+
+}
+
+
+

@@ -22,6 +22,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //instances
     
     var currentweather = Weather()
+    var forecast: Forecast!
     
     //Arrays
     
@@ -41,7 +42,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         
         currentweather.downloadWeatherData {
-              self.UpdateUI()
+            self.downloadForecastData {
+                self.UpdateUI()
+
+            }
         }
 
     }//end view did load
@@ -66,10 +70,20 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return forecastList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as? weatherCell {
+            
+            let forecast = forecastList[indexPath.row]
+            cell.uptateCell(forecast: forecast)
+            return cell
+            
+        }else {
         return UITableViewCell()
+        }
+
     }
     
 ///---function to get forecast data---///
@@ -89,15 +103,14 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         self.forecastList.append(forecast)
                         print(forca)
                     }
-                    
-                    
+                    self.tableView.reloadData()
                     
                 }//end if let list
             
                 
             }//end if let dict
             
-            
+            complete()
             
             
             
