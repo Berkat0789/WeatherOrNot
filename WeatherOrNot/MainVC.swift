@@ -30,6 +30,8 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         
         print(weatherURL)
+        print(forecastURL)
+        
         
         currentweather.downloadWeatherData {
               self.UpdateUI()
